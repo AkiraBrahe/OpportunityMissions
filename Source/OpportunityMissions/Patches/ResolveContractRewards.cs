@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using BattleTech;
 using BattleTech.Framework;
@@ -21,7 +21,7 @@ namespace OpportunityMissions.Patches
                 // Only for successful opportunity missions
                 if (contract.IsOpportunityMission() && contract.State == Contract.ContractState.Complete)
                 {
-                    Logger.Debug($"[AAR_ObjectiveListItem_Init_POSTFIX] Append text for {contract.Override.ID} if special tags are present.");
+                    // Logger.Debug($"[AAR_ObjectiveListItem_Init_POSTFIX] Append text for {contract.Override.ID} if special tags are present.");
 
                     // Successful secondary objective
                     if (!missionObjectiveResult.isPrimary && missionObjectiveResult.status == ObjectiveStatus.Succeeded)
@@ -42,7 +42,7 @@ namespace OpportunityMissions.Patches
             }
             catch (Exception e)
             {
-                Logger.Error(e);
+                // Logger.Error(e);
             }
         }
     }
@@ -60,7 +60,7 @@ namespace OpportunityMissions.Patches
                 // Only for successful opportunity missions
                 if (___theContract.IsOpportunityMission() && ___theContract.State == Contract.ContractState.Complete)
                 {
-                    Logger.Debug($"[AAR_ContractTermsWidget_SetFactionResponseText_POSTFIX] Append text for {___theContract.Override.ID} if special tags are present.");
+                    // Logger.Debug($"[AAR_ContractTermsWidget_SetFactionResponseText_POSTFIX] Append text for {___theContract.Override.ID} if special tags are present.");
 
                     foreach (MissionObjectiveResult missionObjectiveResult in ___theContract.MissionObjectiveResultList)
                     {
@@ -86,7 +86,7 @@ namespace OpportunityMissions.Patches
             }
             catch (Exception e)
             {
-                Logger.Error(e);
+                // Logger.Error(e);
             }
         }
     }
@@ -105,8 +105,8 @@ namespace OpportunityMissions.Patches
                 Contract completedContract = __instance.CompletedContract;
                 bool SimGameStateCompanyTagsHasAnyTrigger = __instance.CompanyTags.Any(tag => tag.Contains("triggerReward-"));
 
-                Logger.Debug($"[SimGameState_ResolveCompleteContract_PREFIX] __instance.CompanyTags: {String.Join(", ", __instance.CompanyTags.ToArray())}");
-                Logger.Debug($"[SimGameState_ResolveCompleteContract_PREFIX] SimGameStateCompanyTagsHasAnyTrigger: {SimGameStateCompanyTagsHasAnyTrigger}");
+                // Logger.Debug($"[SimGameState_ResolveCompleteContract_PREFIX] __instance.CompanyTags: {String.Join(", ", __instance.CompanyTags.ToArray())}");
+                // Logger.Debug($"[SimGameState_ResolveCompleteContract_PREFIX] SimGameStateCompanyTagsHasAnyTrigger: {SimGameStateCompanyTagsHasAnyTrigger}");
 
                 if (completedContract.IsOpportunityMission() && SimGameStateCompanyTagsHasAnyTrigger)
                 {
@@ -114,10 +114,10 @@ namespace OpportunityMissions.Patches
                     {
                         if (tag.Contains("triggerReward-"))
                         {
-                            Logger.Debug($"[SimGameState_ResolveCompleteContract_PREFIX] tag: {tag}");
+                            // Logger.Debug($"[SimGameState_ResolveCompleteContract_PREFIX] tag: {tag}");
                             __instance.SetTimeMoving(false, true);
                             string itemCollectionId = tag.Replace("triggerReward-", "");
-                            Logger.Debug($"[SimGameState_ResolveCompleteContract_PREFIX] itemCollectionId: {itemCollectionId}");
+                            // Logger.Debug($"[SimGameState_ResolveCompleteContract_PREFIX] itemCollectionId: {itemCollectionId}");
                             ___interruptQueue.QueueRewardsPopup(itemCollectionId);
 
                             __instance.CompanyTags.Remove(tag);
@@ -125,11 +125,11 @@ namespace OpportunityMissions.Patches
                     }
                 }
 
-                Logger.Debug($"[SimGameState_ResolveCompleteContract_PREFIX] __instance.CompanyTags: {String.Join(", ", __instance.CompanyTags.ToArray())}");
+                // Logger.Debug($"[SimGameState_ResolveCompleteContract_PREFIX] __instance.CompanyTags: {String.Join(", ", __instance.CompanyTags.ToArray())}");
             }
             catch (Exception e)
             {
-                Logger.Error(e);
+                // Logger.Error(e);
             }
         }
     }

@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using BattleTech;
 using BattleTech.Data;
 using BattleTech.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace OpportunityMissions.Extensions
 {
     internal static class SimGameStateExtensions
     {
-        public static Contract GetValidContractForContractDataAndSystem (this SimGameState simGameState, SimGameState.AddContractData addContractData, StarSystem starSystem)
+        public static Contract GetValidContractForContractDataAndSystem(this SimGameState simGameState, SimGameState.AddContractData addContractData, StarSystem starSystem)
         {
-            Logger.Debug($"[SimGameStateExtensions_GetValidContractForContractDataAndSystem] (addContractData) ContractName: {addContractData.ContractName}, Target: {addContractData.Target}, Employer: {addContractData.Employer}, TargetSystem: {addContractData.TargetSystem}, TargetAlly: {addContractData.TargetAlly}");
-            Logger.Debug($"[SimGameStateExtensions_GetValidContractForContractDataAndSystem] starSystem: {starSystem.Name}");
-            Logger.Debug($"[SimGameStateExtensions_GetValidContractForContractDataAndSystem] starSystem.Def.SupportedBiomes: {String.Join(", ", starSystem.Def.SupportedBiomes.Select(sb => sb.ToString()))}");
+            // Logger.Debug($"[SimGameStateExtensions_GetValidContractForContractDataAndSystem] (addContractData) ContractName: {addContractData.ContractName}, Target: {addContractData.Target}, Employer: {addContractData.Employer}, TargetSystem: {addContractData.TargetSystem}, TargetAlly: {addContractData.TargetAlly}");
+            // Logger.Debug($"[SimGameStateExtensions_GetValidContractForContractDataAndSystem] starSystem: {starSystem.Name}");
+            // Logger.Debug($"[SimGameStateExtensions_GetValidContractForContractDataAndSystem] starSystem.Def.SupportedBiomes: {String.Join(", ", starSystem.Def.SupportedBiomes.Select(sb => sb.ToString()))}");
 
             if (starSystem == null)
             {
@@ -52,9 +52,9 @@ namespace OpportunityMissions.Extensions
             // Debug
             foreach (MapAndEncounters mae in allValidMapAndEncountersForCurrentSystem)
             {
-                Logger.Info($"allValidMapAndEncountersForCurrentSystem (Map): {mae.Map.FriendlyName}");
-                Logger.Info($"allValidMapAndEncountersForCurrentSystem (Encounters): {String.Join(", ", Array.ConvertAll(mae.Encounters, item => item.FriendlyName))}");
-                Logger.Info($"-");
+                // Logger.Info($"allValidMapAndEncountersForCurrentSystem (Map): {mae.Map.FriendlyName}");
+                // Logger.Info($"allValidMapAndEncountersForCurrentSystem (Encounters): {String.Join(", ", Array.ConvertAll(mae.Encounters, item => item.FriendlyName))}");
+                // Logger.Info($"-");
             }
 
             // @ToDo: Remove Map "mapGeneral_taigaRiver_iTnd" for ContractTypeValue "Rescue" (Broken in Vanilla, no buildings at target zones)
@@ -72,8 +72,8 @@ namespace OpportunityMissions.Extensions
 
 
             // Debug
-            Logger.Info($"chosenMapAndEncounters (Map): {mapAndEncounters.Map.FriendlyName}");
-            Logger.Info($"chosenMapAndEncounters: {String.Join(", ", Array.ConvertAll(mapAndEncounters.Encounters, item => item.FriendlyName))}");
+            // Logger.Info($"chosenMapAndEncounters (Map): {mapAndEncounters.Map.FriendlyName}");
+            // Logger.Info($"chosenMapAndEncounters: {String.Join(", ", Array.ConvertAll(mapAndEncounters.Encounters, item => item.FriendlyName))}");
 
 
 
@@ -96,8 +96,8 @@ namespace OpportunityMissions.Extensions
             // Debug
             foreach (EncounterLayer_MDD elMdd in encounterLayers)
             {
-                Logger.Info($"chosenEncounter (Name): {elMdd.FriendlyName}");
-                Logger.Info($"chosenEncounter (ContractTypeValue): {elMdd.ContractTypeValue}");
+                // Logger.Info($"chosenEncounter (Name): {elMdd.FriendlyName}");
+                // Logger.Info($"chosenEncounter (ContractTypeValue): {elMdd.ContractTypeValue}");
             }
 
 
@@ -107,13 +107,13 @@ namespace OpportunityMissions.Extensions
 
 
             // Check if we need to travel
-            if(addContractData.IsGlobal)
+            if (addContractData.IsGlobal)
             {
-                Logger.Debug($"[SimGameStateExtensions_GetValidContractForContractDataAndSystem] Custom handling of travel contracts isn't implemented. Falling back to default handling");
+                // Logger.Debug($"[SimGameStateExtensions_GetValidContractForContractDataAndSystem] Custom handling of travel contracts isn't implemented. Falling back to default handling");
 
                 // Fallback to relevant part of default vanilla method
                 simGameState.AddContract(addContractData);
-            
+
                 //Contract travelContract = simGameState.CreateTravelContract(mapAndEncounters.Map.MapName, mapAndEncounters.Map.MapPath, encounterLayerGUID, contractTypeValue, contractOverride, gameContext, employer, employersAlly, target, targetsAlly, neutralToAll, hostileToAll, addContractData.IsGlobal);
                 //simGameState.PrepContract(travelContract, employer, employersAlly, target, targetsAlly, neutralToAll, hostileToAll, mapAndEncounters.Map.BiomeSkinEntry.BiomeSkin, travelContract.Override.travelSeed, starSystem);
                 //simGameState.GlobalContracts.Add(travelContract);
@@ -122,15 +122,15 @@ namespace OpportunityMissions.Extensions
             }
 
             Contract contract = new Contract(mapAndEncounters.Map.MapName, mapAndEncounters.Map.MapPath, encounterLayerGUID, contractTypeValue, gameInstance, contractOverride, gameContext, true, contractOverride.difficulty, 0, null);
-            Logger.Debug($"[SimGameStateExtensions_GetValidContractForContractDataAndSystem] Contract: {contract.Override.ID}({contractTypeValue}), Difficulty: {contract.Difficulty}, CanNegotiate: {contract.CanNegotiate}, Biome: {mapAndEncounters.Map.BiomeSkinEntry.Name}, Map: {mapAndEncounters.Map.MapName}");
+            // Logger.Debug($"[SimGameStateExtensions_GetValidContractForContractDataAndSystem] Contract: {contract.Override.ID}({contractTypeValue}), Difficulty: {contract.Difficulty}, CanNegotiate: {contract.CanNegotiate}, Biome: {mapAndEncounters.Map.BiomeSkinEntry.Name}, Map: {mapAndEncounters.Map.MapName}");
 
             simGameState.PrepContract(contract, employer, employersAlly, target, targetsAlly, neutralToAll, hostileToAll, mapAndEncounters.Map.BiomeSkinEntry.BiomeSkin, 0, starSystem);
             // Set negotiations
-            if(!contract.CanNegotiate)
+            if (!contract.CanNegotiate)
             {
                 contract.SetNegotiatedValues(contract.Override.negotiatedSalary, contract.Override.negotiatedSalvage);
             }
-            
+
 
 
             return contract;

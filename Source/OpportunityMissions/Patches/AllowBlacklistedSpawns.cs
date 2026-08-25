@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using BattleTech.Data;
@@ -34,13 +34,13 @@ namespace OpportunityMissions.Patches
                 //MAD:
                 if (tags.Contains(overrideBlacklistedTag))
                 {
-                    Logger.Debug($"[Tags_MDDExtenstions_GetTagSetWithRequiredTags_PREFIX] Request has ignoreTag-BLACKLISTED tag set. Removing BLACKLISTED tag");
+                    // Logger.Debug($"[Tags_MDDExtenstions_GetTagSetWithRequiredTags_PREFIX] Request has ignoreTag-BLACKLISTED tag set. Removing BLACKLISTED tag");
                     tagSet.Remove(Tags_MDDExtenstions.BLACKLISTED_TAG);
                     // Need to remove the custom tag too, otherwise the query below will include it as required -> no result -> fallback unit (cicada)
                     tags.Remove(overrideBlacklistedTag);
 
-                    Logger.Info($"[SimGameState_ResolveCompleteContract_PREFIX] requiredTags: {String.Join(", ", tags.ToArray())}");
-                    Logger.Info($"[SimGameState_ResolveCompleteContract_PREFIX] excludedTags: {String.Join(", ", tagSet.ToArray())}");
+                    // Logger.Info($"[SimGameState_ResolveCompleteContract_PREFIX] requiredTags: {String.Join(", ", tags.ToArray())}");
+                    // Logger.Info($"[SimGameState_ResolveCompleteContract_PREFIX] excludedTags: {String.Join(", ", tagSet.ToArray())}");
                 }
                 //:DAM
 
@@ -65,7 +65,7 @@ namespace OpportunityMissions.Patches
             }
             catch (Exception e)
             {
-                Logger.Error(e);
+                // Logger.Error(e);
             }
         }
     }

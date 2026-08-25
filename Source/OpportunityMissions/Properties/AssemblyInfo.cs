@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("OpportunityMissions")]
@@ -6,5 +6,5 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyProduct("OpportunityMissions")]
 [assembly: ComVisible(false)]
 [assembly: Guid("E614C6FD-6BC7-4925-A936-64E1F3C8A94A")]
-[assembly: AssemblyVersion("1.9.1.*")]
+[assembly: AssemblyVersion("1.9.2.*")]
 

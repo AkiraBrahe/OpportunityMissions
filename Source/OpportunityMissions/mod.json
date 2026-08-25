@@ -1,28 +1,22 @@
 {
-    "Name": "OpportunityMissions",
-    "Enabled": true,
+  "Name": "OpportunityMissions",
+  "Enabled": true,
 
-    "Version": "1.9.1-001R",
-    "Description": "tbd",
-    "Author": "Mad",
-	
-	"DLL": "OpportunityMissions.dll",
-	
-    "Manifest": [
-        { "Type": "SimGameEventDef", "Path": "SimGameEventDefs/" },
-        { "Type": "ContractOverride", "Path": "ContractOverrides/" },
-        { "Type": "TurretDef", "Path": "TurretDefs/" },
-		{ "Type": "LanceDef", "Path": "LanceDefs/" },
-        { "Type": "MechDef", "Path": "MechDefs/" },
-		{ "Type": "PilotDef", "Path": "PilotDefs/" },
-        { "Type": "ItemCollectionDef", "Path": "ItemCollectionDefs/" },
-        {
-            "Type": "AdvancedJSONMerge",
-            "Path": "StarSystemDefsMerge/"
-        },
-        {
-            "Type": "AdvancedJSONMerge",
-            "Path": "MechDefsMerge/"
-        }
-    ]
+  "Version": "1.9.1-001R",
+  "Description": "tbd",
+  "Author": "Mad",
+
+  "DLL": "OpportunityMissions.dll",
+
+  "Manifest": [
+    { "Type": "AdvancedJSONMerge", "Path": "MechDefsMerge/" },
+    { "Type": "AdvancedJSONMerge", "Path": "StarSystemDefsMerge/" },
+    { "Type": "ContractOverride", "Path": "ContractOverrides/" },
+    { "Type": "ItemCollectionDef", "Path": "ItemCollectionDefs/" },
+    { "Type": "LanceDef", "Path": "LanceDefs/" },
+    { "Type": "MechDef", "Path": "MechDefs/" },
+    { "Type": "PilotDef", "Path": "PilotDefs/" },
+    { "Type": "SimGameEventDef", "Path": "SimGameEventDefs/" },
+    { "Type": "TurretDef", "Path": "TurretDefs/" }
+  ]
 }

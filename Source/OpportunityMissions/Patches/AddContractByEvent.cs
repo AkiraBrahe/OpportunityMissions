@@ -1,6 +1,3 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using BattleTech;
 using BattleTech.Framework;
 using BattleTech.UI;
@@ -8,6 +5,9 @@ using BattleTech.UI.TMProWrapper;
 using Harmony;
 using HBS;
 using OpportunityMissions.Extensions;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace OpportunityMissions.Patches
@@ -19,13 +19,13 @@ namespace OpportunityMissions.Patches
         {
             try
             {
-                Logger.Debug($"[StarSystem_ResetContracts_POSTFIX] Remove company tag for any active opportunity mission");
+                // Logger.Debug($"[StarSystem_ResetContracts_POSTFIX] Remove company tag for any active opportunity mission");
 
                 __instance.Sim.CompanyTags.Remove("starsystem_opportunitymission_active");
             }
             catch (Exception e)
             {
-                Logger.Error(e);
+                // Logger.Error(e);
             }
         }
     }
@@ -42,9 +42,9 @@ namespace OpportunityMissions.Patches
             {
                 if (__instance.IsOpportunityMission() && (cbill + salvage > 1.01f))
                 {
-                    Logger.Debug($"[Contract_SetNegotiatedValues_PREFIX] Allow negotiations > 1.01f for {__instance.Override.ID}");
-                    Logger.Debug($"[Contract_SetNegotiatedValues_PREFIX] cbill: {cbill}");
-                    Logger.Debug($"[Contract_SetNegotiatedValues_PREFIX] salvage: {salvage}");
+                    // Logger.Debug($"[Contract_SetNegotiatedValues_PREFIX] Allow negotiations > 1.01f for {__instance.Override.ID}");
+                    // Logger.Debug($"[Contract_SetNegotiatedValues_PREFIX] cbill: {cbill}");
+                    // Logger.Debug($"[Contract_SetNegotiatedValues_PREFIX] salvage: {salvage}");
 
                     new Traverse(__instance).Property("PercentageContractValue").SetValue(cbill);
                     new Traverse(__instance).Property("PercentageContractSalvage").SetValue(salvage);
@@ -57,7 +57,7 @@ namespace OpportunityMissions.Patches
             }
             catch (Exception e)
             {
-                Logger.Error(e);
+                // Logger.Error(e);
                 return true;
             }
         }
@@ -75,14 +75,14 @@ namespace OpportunityMissions.Patches
             {
                 if (contract.IsOpportunityMission())
                 {
-                    Logger.Info($"[SGContractsWidget_GetContractComparePriority_POSTFIX] Set {contract.Override.ID} to have highest sort order");
+                    // Logger.Info($"[SGContractsWidget_GetContractComparePriority_POSTFIX] Set {contract.Override.ID} to have highest sort order");
 
                     __result = -1;
                 }
             }
             catch (Exception e)
             {
-                Logger.Error(e);
+                // Logger.Error(e);
             }
         }
     }
@@ -100,7 +100,7 @@ namespace OpportunityMissions.Patches
                 // Only for "normal" contracts with no negotiations
                 if (contract.IsOpportunityMission())
                 {
-                    Logger.Debug($"[SGContractsWidget_PopulateContract_POSTFIX] {contract.Override.ID} is an opportunity mission");
+                    // Logger.Debug($"[SGContractsWidget_PopulateContract_POSTFIX] {contract.Override.ID} is an opportunity mission");
 
                     StarSystem targetSystem = contract.GameContext.GetObject(GameContextObjectTagEnum.TargetStarSystem) as StarSystem;
                     ___ContractLocationField.SetText("Opportunity Mission at {0}", new object[] { targetSystem.Name });
@@ -114,7 +114,7 @@ namespace OpportunityMissions.Patches
             }
             catch (Exception e)
             {
-                Logger.Error(e);
+                // Logger.Error(e);
             }
         }
     }
@@ -134,7 +134,7 @@ namespace OpportunityMissions.Patches
                 if (contract.IsOpportunityMission())
                 {
                     isOpportunityMission = true;
-                    Logger.Debug($"[SGContractsWidget_AddContract_PREFIX] {contract.Override.ID} is an opportunity mission");
+                    // Logger.Debug($"[SGContractsWidget_AddContract_PREFIX] {contract.Override.ID} is an opportunity mission");
 
                     // Temporarily set contractDisplayStyle
                     contract.Override.contractDisplayStyle = ContractDisplayStyle.BaseCampaignStory;
@@ -142,7 +142,7 @@ namespace OpportunityMissions.Patches
             }
             catch (Exception e)
             {
-                Logger.Error(e);
+                // Logger.Error(e);
             }
         }
 
@@ -175,7 +175,7 @@ namespace OpportunityMissions.Patches
                     if (sgContractsListItem.Contract.IsOpportunityMission())
                     {
                         opportunityMissionIndexList.Add(i);
-                        Logger.Debug($"[SGContractsWidget_AddContract_PREFIX] Contract at index {i} is an opportunity mission");
+                        // Logger.Debug($"[SGContractsWidget_AddContract_PREFIX] Contract at index {i} is an opportunity mission");
 
                         // Temporarily set contractDisplayStyle
                         sgContractsListItem.Contract.Override.contractDisplayStyle = ContractDisplayStyle.BaseCampaignStory;
@@ -184,7 +184,7 @@ namespace OpportunityMissions.Patches
             }
             catch (Exception e)
             {
-                Logger.Error(e);
+                // Logger.Error(e);
             }
         }
 
@@ -233,7 +233,7 @@ namespace OpportunityMissions.Patches
             }
             catch (Exception e)
             {
-                Logger.Error(e);
+                // Logger.Error(e);
             }
         }
     }
@@ -270,7 +270,7 @@ namespace OpportunityMissions.Patches
                 {
                     // Validate target system and enrich contractData
                     StarSystem targetSystem;
-                    Logger.Debug($"[SimGameState_ApplyEventAction_PREFIX] addContractData.TargetSystem: {addContractData.TargetSystem}");
+                    // Logger.Debug($"[SimGameState_ApplyEventAction_PREFIX] addContractData.TargetSystem: {addContractData.TargetSystem}");
                     if (!string.IsNullOrEmpty(addContractData.TargetSystem))
                     {
                         string validatedSystemString = simulation.GetValidatedSystemString(addContractData.TargetSystem);
@@ -283,13 +283,13 @@ namespace OpportunityMissions.Patches
                         else
                         {
                             throw new Exception("Couldn't find StarSystem for: " + validatedSystemString);
-                        }  
+                        }
                     }
                     else
                     {
                         targetSystem = simulation.CurSystem;
                     }
-                    Logger.Debug($"[SimGameState_ApplyEventAction_PREFIX] targetSystem.ID: {targetSystem.ID}");
+                    // Logger.Debug($"[SimGameState_ApplyEventAction_PREFIX] targetSystem.ID: {targetSystem.ID}");
 
 
 
@@ -333,13 +333,13 @@ namespace OpportunityMissions.Patches
 
 
                     // Need to check this as the initial contract fetching routine clears all existing contracts
-                    Logger.Debug($"[SimGameState_ApplyEventAction_PREFIX] targetSystem.InitialContractsFetched: {targetSystem.InitialContractsFetched}");
+                    // Logger.Debug($"[SimGameState_ApplyEventAction_PREFIX] targetSystem.InitialContractsFetched: {targetSystem.InitialContractsFetched}");
                     if (!targetSystem.InitialContractsFetched)
                     {
                         SceneSingletonBehavior<UnityGameInstance>.Instance.StartCoroutine(InjectAdditionalContractRoutine());
                         return false;
                     }
-                    else 
+                    else
                     {
                         InjectAdditionalContract(false);
 
@@ -350,7 +350,7 @@ namespace OpportunityMissions.Patches
             }
             catch (Exception e)
             {
-                Logger.Error(e);
+                // Logger.Error(e);
                 return true;
             }
         }

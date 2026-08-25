@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
 using BattleTech;
 using BattleTech.Data;
 using Harmony;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace OpportunityMissions.Patches
@@ -14,19 +14,19 @@ namespace OpportunityMissions.Patches
         {
             try
             {
-                Logger.Info($"[SimGameEventTracker_CheckRoll_PREFIX] (ORIGINAL) randomRoll: {randomRoll}");
-                Logger.Info($"[SimGameEventTracker_CheckRoll_PREFIX] ___eventChance: {___eventChance}");
-                Logger.Info($"[SimGameEventTracker_CheckRoll_PREFIX] ___chanceIncrement: {___chanceIncrement}");
+                // Logger.Info($"[SimGameEventTracker_CheckRoll_PREFIX] (ORIGINAL) randomRoll: {randomRoll}");
+                // Logger.Info($"[SimGameEventTracker_CheckRoll_PREFIX] ___eventChance: {___eventChance}");
+                // Logger.Info($"[SimGameEventTracker_CheckRoll_PREFIX] ___chanceIncrement: {___chanceIncrement}");
 
                 // Tweak the roll to slightly raise the frequency of events
                 float modifiedRoll = randomRoll - 10;
                 randomRoll = Mathf.Clamp(modifiedRoll, 0f, 100f);
 
-                Logger.Info($"[SimGameEventTracker_CheckRoll_PREFIX] (TWEAKED) randomRoll: {randomRoll}");
+                // Logger.Info($"[SimGameEventTracker_CheckRoll_PREFIX] (TWEAKED) randomRoll: {randomRoll}");
             }
             catch (Exception e)
             {
-                Logger.Error(e);
+                // Logger.Error(e);
             }
         }
     }
@@ -40,9 +40,9 @@ namespace OpportunityMissions.Patches
         {
             try
             {
-                Logger.Info($"[SimGameEventTracker_GetRandomEvent_POSTFIX] __result.Def.Description.Id: {__result.Def.Description.Id}");
-                Logger.Info($"[SimGameEventTracker_GetRandomEvent_POSTFIX] ___discardList: {String.Join(", ", ___discardList.ToArray())}");
-                Logger.Info($"[SimGameEventTracker_GetRandomEvent_POSTFIX] ___sim.CompanyTags: {String.Join(", ", ___sim.CompanyTags.ToArray())}");
+                // Logger.Info($"[SimGameEventTracker_GetRandomEvent_POSTFIX] __result.Def.Description.Id: {__result.Def.Description.Id}");
+                // Logger.Info($"[SimGameEventTracker_GetRandomEvent_POSTFIX] ___discardList: {String.Join(", ", ___discardList.ToArray())}");
+                // Logger.Info($"[SimGameEventTracker_GetRandomEvent_POSTFIX] ___sim.CompanyTags: {String.Join(", ", ___sim.CompanyTags.ToArray())}");
 
                 // Remove custom events from discardList to allow them to reoccur earlier (after their exclusion tags expire)
                 // REQUIRES custom exclusion tag in SimGameEventDef
@@ -51,11 +51,11 @@ namespace OpportunityMissions.Patches
                     ___discardList.Remove(__result.Def.Description.Id);
                 }
 
-                Logger.Info($"[SimGameEventTracker_GetRandomEvent_POSTFIX] ___discardList: {String.Join(", ", ___discardList.ToArray())}");
+                // Logger.Info($"[SimGameEventTracker_GetRandomEvent_POSTFIX] ___discardList: {String.Join(", ", ___discardList.ToArray())}");
             }
             catch (Exception e)
             {
-                Logger.Error(e);
+                // Logger.Error(e);
             }
         }
     }
@@ -70,18 +70,18 @@ namespace OpportunityMissions.Patches
         {
             try
             {
-                //Logger.Info($"[SimGameEventTracker_IsEventValid_POSTFIX] evt.EventDefID: {evt.EventDefID}");
-                //Logger.Info($"[SimGameEventTracker_IsEventValid_POSTFIX] scope: {scope}");
-                //Logger.Info($"[SimGameEventTracker_IsEventValid_POSTFIX] __result: {__result}");
+                // Logger.Info($"[SimGameEventTracker_IsEventValid_POSTFIX] evt.EventDefID: {evt.EventDefID}");
+                // Logger.Info($"[SimGameEventTracker_IsEventValid_POSTFIX] scope: {scope}");
+                // Logger.Info($"[SimGameEventTracker_IsEventValid_POSTFIX] __result: {__result}");
 
                 if (__result)
                 {
-                    Logger.Info($"[SimGameEventTracker_IsEventValid_POSTFIX] Currently valid event id: {evt.EventDefID}");
+                    // Logger.Info($"[SimGameEventTracker_IsEventValid_POSTFIX] Currently valid event id: {evt.EventDefID}");
                 }
             }
             catch (Exception e)
             {
-                Logger.Error(e);
+                // Logger.Error(e);
             }
         }
     }

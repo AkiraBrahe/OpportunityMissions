@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OpportunityMissions</RootNamespace>
     <AssemblyName>OpportunityMissions</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -39,7 +39,6 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Unity.TextMeshPro" />
@@ -48,9 +47,6 @@
     <Reference Include="UnityEngine.UI" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\Link\MadLogger.cs">
-      <Link>MadLogger.cs</Link>
-    </Compile>
     <Compile Include="Extensions\Contract.cs" />
     <Compile Include="Extensions\SimGameState.cs" />
     <Compile Include="Holder.cs" />

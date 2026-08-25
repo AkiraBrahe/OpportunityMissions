@@ -1,6 +1,6 @@
-﻿using System.Reflection;
 using Harmony;
 using System.IO;
+using System.Reflection;
 
 namespace OpportunityMissions
 {
@@ -17,7 +17,7 @@ namespace OpportunityMissions
             ModDirectory = directory;
             LogPath = Path.Combine(ModDirectory, "OpportunityMissions.log");
 
-            Logger.Initialize(LogPath, DebugLevel, ModDirectory, nameof(OpportunityMissions));
+            // Logger.Initialize(LogPath, DebugLevel, ModDirectory, nameof(OpportunityMissions));
 
             HarmonyInstance harmony = HarmonyInstance.Create("de.mad.OpportunityMissions");
             harmony.PatchAll(Assembly.GetExecutingAssembly());

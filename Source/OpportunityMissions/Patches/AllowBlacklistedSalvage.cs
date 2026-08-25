@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using BattleTech;
 using BattleTech.Data;
@@ -18,12 +18,12 @@ namespace OpportunityMissions.Patches
             {
                 if (__instance.ActivelyShownCombatant != null && __instance.ActivelyShownCombatant is Mech mech)
                 {
-                    Logger.Debug($"[CombatHUDTargetingComputer_RefreshActorInfo_POSTFIX] ({mech.DisplayName}) mech.MechDef.MechTags: {String.Join(", ", mech.MechDef.MechTags.ToArray())}");
+                    // Logger.Debug($"[CombatHUDTargetingComputer_RefreshActorInfo_POSTFIX] ({mech.DisplayName}) mech.MechDef.MechTags: {String.Join(", ", mech.MechDef.MechTags.ToArray())}");
                 }
             }
             catch (Exception e)
             {
-                Logger.Error(e);
+                // Logger.Error(e);
             }
         }
     }
@@ -42,14 +42,14 @@ namespace OpportunityMissions.Patches
                     if (effectTag == "tagMech-WHITELIST_PARTS")
                     {
                         mech.MechDef.MechTags.Add("WHITELIST_PARTS");
-                        Logger.Debug($"[AbstractActor_CreateSpawnEffectByTag_PREFIX] Added WHITELIST_PARTS tag to MechDef of {mech.DisplayName}");
+                        // Logger.Debug($"[AbstractActor_CreateSpawnEffectByTag_PREFIX] Added WHITELIST_PARTS tag to MechDef of {mech.DisplayName}");
 
                         return false;
                     }
                     else if (effectTag == "tagMech-WHITELIST_COMPONENTS")
                     {
                         mech.MechDef.MechTags.Add("WHITELIST_COMPONENTS");
-                        Logger.Debug($"[AbstractActor_CreateSpawnEffectByTag_PREFIX] Added WHITELIST_COMPONENTS tag to MechDef of {mech.DisplayName}");
+                        // Logger.Debug($"[AbstractActor_CreateSpawnEffectByTag_PREFIX] Added WHITELIST_COMPONENTS tag to MechDef of {mech.DisplayName}");
 
                         return false;
                     }
@@ -59,7 +59,7 @@ namespace OpportunityMissions.Patches
             }
             catch (Exception e)
             {
-                Logger.Error(e);
+                // Logger.Error(e);
                 return true;
             }
         }
@@ -77,7 +77,7 @@ namespace OpportunityMissions.Patches
                 // Only for opportunity contracts
                 if (__instance.IsOpportunityMission())
                 {
-                    Logger.Debug($"[Contract_GenerateSalvage_POSTFIX] Checking BLACKLISTED overrides for contract {__instance.Override.ID}");
+                    // Logger.Debug($"[Contract_GenerateSalvage_POSTFIX] Checking BLACKLISTED overrides for contract {__instance.Override.ID}");
 
                     SimGameState simGameState = __instance.BattleTechGame.Simulation;
                     SimGameConstants simGameConstants = simGameState.Constants;
@@ -92,7 +92,7 @@ namespace OpportunityMissions.Patches
                         // Component handling needs to be before evaluating MechParts as there the MechDef is probably normalized
                         if (mech.MechTags.Contains("WHITELIST_COMPONENTS"))
                         {
-                            Logger.Debug($"[Contract_GenerateSalvage_POSTFIX] MechDef of {mech.Name} has WHITELIST_COMPONENTS tag. Manually adding blacklisted components to salvage.");
+                            // Logger.Debug($"[Contract_GenerateSalvage_POSTFIX] MechDef of {mech.Name} has WHITELIST_COMPONENTS tag. Manually adding blacklisted components to salvage.");
 
                             foreach (MechComponentRef mechComponentRef in mech.Inventory)
                             {
@@ -104,7 +104,7 @@ namespace OpportunityMissions.Patches
 
                                 if (mechComponentRef.Def.ComponentTags.Contains("BLACKLISTED"))
                                 {
-                                    Logger.Debug($"[Contract_GenerateSalvage_PREFIX] mechComponentRef.Def {mechComponentRef.Def.Description.Id} has BLACKLISTED tag. Adding to salvage.");
+                                    // Logger.Debug($"[Contract_GenerateSalvage_PREFIX] mechComponentRef.Def {mechComponentRef.Def.Description.Id} has BLACKLISTED tag. Adding to salvage.");
 
                                     SalvageDef salvageDef = Utilities.CreateComponent(simGameConstants, __instance, mechComponentRef.Def);
                                     ___finalPotentialSalvage.Add(salvageDef);
@@ -117,11 +117,11 @@ namespace OpportunityMissions.Patches
                         // MechParts
                         if (mech.MechTags.Contains("BLACKLISTED") || mech.Chassis.ChassisTags.Contains("BLACKLISTED"))
                         {
-                            Logger.Debug($"[Contract_GenerateSalvage_POSTFIX] MechDef or ChassisDef of {mech.Name} has BLACKLISTED tag. Checking for override flags.");
+                            // Logger.Debug($"[Contract_GenerateSalvage_POSTFIX] MechDef or ChassisDef of {mech.Name} has BLACKLISTED tag. Checking for override flags.");
 
                             if (mech.MechTags.Contains("WHITELIST_PARTS"))
                             {
-                                Logger.Debug($"[Contract_GenerateSalvage_POSTFIX] MechDef of {mech.Name} has WHITELIST_PARTS tag. Manually adding MechParts to salvage.");
+                                // Logger.Debug($"[Contract_GenerateSalvage_POSTFIX] MechDef of {mech.Name} has WHITELIST_PARTS tag. Manually adding MechParts to salvage.");
 
                                 // Needs to work on original MechDef so has to be called before a possible normalization
                                 int numberOfParts = Utilities.GetMechPartCountForSalvage(mech, pilot);
@@ -130,7 +130,7 @@ namespace OpportunityMissions.Patches
                                 string stockMechDefId = mech.ChassisID.Replace("chassisdef", "mechdef");
                                 if (mech.Description.Id != stockMechDefId)
                                 {
-                                    Logger.Debug($"[Contract_GenerateSalvage_POSTFIX] Normalizing {mech.Description.Id} to {stockMechDefId}");
+                                    // Logger.Debug($"[Contract_GenerateSalvage_POSTFIX] Normalizing {mech.Description.Id} to {stockMechDefId}");
                                     mech = ___dataManager.MechDefs.Get(stockMechDefId);
                                 }
 
@@ -147,7 +147,7 @@ namespace OpportunityMissions.Patches
             }
             catch (Exception e)
             {
-                Logger.Error(e);
+                // Logger.Error(e);
             }
         }
     }
