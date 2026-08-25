@@ -153,6 +153,9 @@ namespace OpportunityMissions.Patches
             {
                 contract.Override.contractDisplayStyle = ContractDisplayStyle.BaseCampaignNormal;
             }
+
+            // Always reset the flag after processing
+            isOpportunityMission = false;
         }
     }
 
